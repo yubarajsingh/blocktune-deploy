@@ -1,10 +1,10 @@
-import Navbar from "@components/ui/navbar";
-
+import { Navbar, Footer } from "@components/ui";
 
 export default function Home() {
   return (
     <>
-      <Navbar/>
+      <Navbar />
+      <Footer />
     </>
   );
 }
