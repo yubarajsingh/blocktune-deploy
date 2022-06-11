@@ -40,16 +40,28 @@ export default function Navbar() {
           </div>
 
           <nav className="items-center justify-center hidden space-x-8 text-sm font-medium lg:flex lg:flex-1 lg:w-0">
-            <a className="text-gray-300 hover:text-slate-900 hover:bg-green-100 hover:rounded-md" href="/">
+            <a
+              className="text-gray-300 hover:text-slate-900 hover:bg-green-100 hover:rounded-md"
+              href="/"
+            >
               Dashboard
             </a>
-            <a className="text-gray-300 hover:text-slate-900 hover:bg-green-100 hover:rounded-md" href="">
+            <a
+              className="text-gray-300 hover:text-slate-900 hover:bg-green-100 hover:rounded-md"
+              href=""
+            >
               My Collection
             </a>
-            <a className="text-gray-300 hover:text-slate-900 hover:bg-green-100 hover:rounded-md" href="">
+            <a
+              className="text-gray-300 hover:text-slate-900 hover:bg-green-100 hover:rounded-md"
+              href="/topArtists"
+            >
               Top Artist
             </a>
-            <a className="text-gray-300 hover:text-slate-900 hover:bg-green-100 hover:rounded-md" href="">
+            <a
+              className="text-gray-300 hover:text-slate-900 hover:bg-green-100 hover:rounded-md"
+              href="/buyTokens"
+            >
               Buy Tokens
             </a>
           </nav>
@@ -57,7 +69,9 @@ export default function Navbar() {
           {isConnected ? (
             <>
               <div className="items-center hidden bg-slate-700 space-x-6 m-3 lg:flex">
-                <span className="px-5 py-2 text-sm text-gray-200 ">Tokens Colleted: {token} </span>
+                <span className="px-5 py-2 text-sm text-gray-200 ">
+                  Tokens Colleted: {token}{" "}
+                </span>
               </div>
               <div className="items-center hidden space-x-6 m-3 lg:flex ">
                 <a
@@ -77,7 +91,7 @@ export default function Navbar() {
           ) : (
             <div className="items-center hidden space-x-4 lg:flex">
               <a
-                className="px-5 py-2 text-sm font-medium text-gray-200 bg-blue-700 rounded-lg hover:text-slate-900 hover:bg-green-100 hover:rounded-md"
+                className="px-5 py-2 text-sm text-gray-200 bg-gray-700 rounded-lg animate-pulse font-bold hover:text-slate-900 hover:bg-green-100 hover:rounded-md"
                 href=""
               >
                 Connect
