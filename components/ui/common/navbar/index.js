@@ -34,7 +34,7 @@ export default function Navbar() {
                   <svg
                     className="w-5 h-5 hover:text-slate-900 hover:bg-green-100 hover:rounded-md hover:px-1"
                     fill="currentColor"
-                    viewbox="0 0 20 20"
+                    viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
