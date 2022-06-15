@@ -1,12 +1,20 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useWeb3 } from "@components/providers";
+import {Button} from "@components/ui/common";
+import { useAccount } from "@components/web3/hooks/useAccount";
 
-export default function Navbar() {
-  const isConnected = false;
+
+
+export default function Navbar() { 
   const token = 500;
+  const { connect, isWeb3Loaded,isLoading } = useWeb3();
+  const { account } = useAccount()
   return (
     <>
+
       <header className="shadow-sm bg-gray-900">
+        {account}
         <div className="flex items-center justify-between h-16 max-w-screen-xl px-4 mx-auto">
           <div className="flex items-center space-x-4">
             <div className="h-16 w-16 self-center mr-2">
@@ -14,8 +22,8 @@ export default function Navbar() {
                 className="self-center"
                 src="/logo.png"
                 alt="logo"
-                height='64px'
-                width='64px'
+                height="64px"
+                width="64px"
               />
             </div>
 
@@ -71,9 +79,21 @@ export default function Navbar() {
             </Link>
           </nav>
 
-          {isConnected ? (
-            <>
-              <div className="items-center hidden bg-slate-700 space-x-6 m-3 lg:flex">
+          {isLoading ? 
+              <Button disabled = {true} onClick={connect}>Loading</Button> 
+              : isWeb3Loaded ?
+              <Button onClick={connect}>Connect</Button>
+           : (
+            <Button onClick={() =>window.open('https://metamask.io/')}>Install Metamask</Button>
+          )}
+        </div>
+      </header>
+    </>
+  );
+}
+
+
+{/* <div className="items-center hidden bg-slate-700 space-x-6 m-3 lg:flex">
                 <span className="px-5 py-2 text-sm text-gray-200 ">
                   Tokens Colleted: {token}
                 </span>
@@ -94,20 +114,4 @@ export default function Navbar() {
                   width='50px'
                   alt="Profile"
                 />
-              </div>
-            </>
-          ) : (
-            <div className="items-center hidden space-x-4 lg:flex">
-              <a
-                className="px-5 py-2 text-sm text-gray-200 bg-gray-700 rounded-lg animate-pulse font-bold hover:text-slate-900 hover:bg-green-100 hover:rounded-md"
-                href=""
-              >
-                Connect
-              </a>
-            </div>
-          )}
-        </div>
-      </header>
-    </>
-  );
-}
+              </div>*/}
