@@ -47,6 +47,7 @@ export default function Web3Provider({children}) {
         async() => {
           try{
             await provider.request({method: 'eth_requestAccounts'})
+            location.reload()
           }
           catch(error){
             location.reload()

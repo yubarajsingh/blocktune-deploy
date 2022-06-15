@@ -11,7 +11,7 @@
   "dependencies": {
     "@metamask/detect-provider": "^1.2.0",
     "@walletconnect/web3-provider": "^1.7.8",
-    "eslint-plugin-react-hooks": "^4.6.0-next-f7b44539c-20220610",
+    "eslint-plugin-react-hooks": "^4.6.0-next-be229c565-20220613",
     "moralis": "^1.8.0",
     "next": "12.1.6",
     "react": "18.1.0",

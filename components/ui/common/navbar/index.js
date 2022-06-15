@@ -1,20 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useWeb3 } from "@components/providers";
-import {Button} from "@components/ui/common";
+import { Button } from "@components/ui/common";
 import { useAccount } from "@components/web3/hooks/useAccount";
 
-
-
-export default function Navbar() { 
+export default function Navbar() {
   const token = 500;
-  const { connect, isWeb3Loaded,isLoading } = useWeb3();
-  const { account } = useAccount()
+  const { connect, isWeb3Loaded, isLoading } = useWeb3();
+  const { account } = useAccount();
   return (
     <>
-
       <header className="shadow-sm bg-gray-900">
-        {account}
         <div className="flex items-center justify-between h-16 max-w-screen-xl px-4 mx-auto">
           <div className="flex items-center space-x-4">
             <div className="h-16 w-16 self-center mr-2">
@@ -79,12 +75,43 @@ export default function Navbar() {
             </Link>
           </nav>
 
-          {isLoading ? 
-              <Button disabled = {true} onClick={connect}>Loading</Button> 
-              : isWeb3Loaded ?
+          {isLoading ? (
+            <Button disabled={true} onClick={connect}>
+              Loading
+            </Button>
+          ) : isWeb3Loaded ? (
+            account ? (
+              <>
+                <div className="items-center hidden bg-slate-700 space-x-6 m-3 lg:flex">
+                  <span className="px-5 py-2 text-sm text-gray-200 ">
+                    Tokens Colleted: {token}
+                  </span>
+                </div>
+                <div className="items-center hidden space-x-6 m-3 lg:flex ">
+                  <a
+                    className="px-5 py-2 text-sm font-medium text-gray-200 bg-gray-500 rounded-lg hover:text-slate-900 hover:bg-green-100 hover:rounded-md"
+                    href=""
+                  >
+                    Create
+                  </a>
+                </div>
+                <div className="items-center  hidden space-x-8 lg:flex">
+                  <Image
+                    className="h-12 w-12 self-center rounded-full"
+                    src="/profile.jpg"
+                    height="50px"
+                    width="50px"
+                    alt="Profile"
+                  />
+                </div>
+              </>
+            ) : (
               <Button onClick={connect}>Connect</Button>
-           : (
-            <Button onClick={() =>window.open('https://metamask.io/')}>Install Metamask</Button>
+            )
+          ) : (
+            <Button onClick={() => window.open("https://metamask.io/")}>
+              Install Metamask
+            </Button>
           )}
         </div>
       </header>
@@ -92,26 +119,3 @@ export default function Navbar() {
   );
 }
 
-
-{/* <div className="items-center hidden bg-slate-700 space-x-6 m-3 lg:flex">
-                <span className="px-5 py-2 text-sm text-gray-200 ">
-                  Tokens Colleted: {token}
-                </span>
-              </div>
-              <div className="items-center hidden space-x-6 m-3 lg:flex ">
-                <a
-                  className="px-5 py-2 text-sm font-medium text-gray-200 bg-gray-500 rounded-lg hover:text-slate-900 hover:bg-green-100 hover:rounded-md"
-                  href=""
-                >
-                  Create
-                </a>
-              </div>
-              <div className="items-center  hidden space-x-8 lg:flex">
-                <Image
-                  className="h-12 w-12 self-center rounded-full"
-                  src="/profile.jpg"
-                  height='50px'
-                  width='50px'
-                  alt="Profile"
-                />
-              </div>*/}
