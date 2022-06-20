@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.6",
     "@metamask/detect-provider": "^1.2.0",
     "@walletconnect/web3-provider": "^1.7.8",
+    "daisyui": "^2.15.4",
     "eslint-plugin-react-hooks": "^4.6.0-next-be229c565-20220613",
     "moralis": "^1.8.0",
     "next": "12.1.6",
