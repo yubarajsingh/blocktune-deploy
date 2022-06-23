@@ -3,46 +3,45 @@
 
 
 
-export default function topArtists() {
-
+export default function Artists() {
     
   
     const wholeList=[
       {
         image :"a1.jpg",
         artist :"Resu",
-        address: "a2367vd2367452xb7324x2367bx32xt6x23"
+        address: "0xa2367vd2367452xb7324x2386bx32xt690"
         
       
       },
       {
         image :"a2.jpg",
         artist :"sakyu",
-        address: "a2367vd236745wexb7324x2386bx32xt6x23"
+        address: "0x452367vd2367452xb7324x2386bx32xt6x56"
       
       },
       {
         image :"a3.jpeg",
         artist :"Atif",
-        address: "a2367vd2367452xb7324x2386bx32xt6x23"
+        address: "0xa2367vd2367452xb7324x2386bx32xt6x59"
       
       },
       {
         image :"a4.jpg",
         artist :"Arina",
-        address: "a2367vd2367452xb7324x2386bx32xt6x23"
+        address: "0xa2367vd2367452xb7324x2386bx32xt600"
       
       },
       {
         image :"a5.jpg",
         artist :"Arjit",
-        address: "a2367vd2367452xb7324x2386bx32xt6x23"
+        address: "0xa2367vd2367452xb7324x2386bx32xt609"
       
       },
       {
         image :"a6.jpg",
         artist :"Darshan",
-        address: "a2367vd2367452xb7324x2386bx32xt6x23"
+        address: "0xa2367vd2367452xb7324x2386bx32xt6x23"
       
       },
      

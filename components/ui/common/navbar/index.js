@@ -23,8 +23,8 @@ export default function Navbar() {
       >
         <Image
           src="/logo.png"
-          width={80}
-          height={80}
+          width={90}
+          height={68}
           alt="Logo"
           className="cursor-pointer"
         />
@@ -35,7 +35,7 @@ export default function Navbar() {
               <span className="span">Home</span>
             </a>
           </Link>
-          <Link href="/">
+          <Link href="/mycollections">
             <a className="header-link group">
               <CollectionIcon className="h-4" />
               <span className="span">My Collection</span>

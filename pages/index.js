@@ -1,92 +1,105 @@
-/* eslint-disable react/no-unescaped-entities */
+import Artists from '@components/ui/artists'
+import React from 'react'
 
-
-
-
-export default function Home() {
-  let i= 0;
-  const list=[
-    "trendingArtists",
-    "topArtists",
-    "topTracks",
-    "topAlbums",
-    "topPlaylists",
-    "topCharts",
-  ];
-
-  const wholeList=[
-    {
-      image :"a1.jpg",
-      artist :"Resu",
-      address: "a2367vd2367452xb7324x2386bx32xt6x23"
-      
-    
-    },
-    {
-      image :"a2.jpg",
-      artist :"sakyu",
-      address: "a2367vd2367452xb7324x2386bx32xt6x23"
-    
-    },
-    {
-      image :"a3.jpeg",
-      artist :"Atif",
-      address: "a2367vd2367452xb7324x2386bx32xt6x23"
-    
-    },
-    {
-      image :"a4.jpg",
-      artist :"Arina",
-      address: "a2367vd2367452xb7324x2386bx32xt6x23"
-    
-    },
-    {
-      image :"a5.jpg",
-      artist :"Arjit",
-      address: "a2367vd2367452xb7324x2386bx32xt6x23"
-    
-    },
-    {
-      image :"a6.jpg",
-      artist :"Darshan",
-      address: "a2367vd2367452xb7324x2386bx32xt6x23"
-    
-    },
-   
-   
-  
-
-  ];
-
-
- 
+function index() {
   return (
-   
+    
     <>
-    <div className=" py-3 bg-gray-700  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-      {
-        wholeList.map((item,index)=>{
-          return <div class="drop-shadow-10xl shadow-md shadow-white-300 mb-3 max-w-sm bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-          <div class="flex justify-end px-4 pt-4">
-             
-            
-              
-          </div>
-          <div class="flex flex-col items-center pb-10">
-              <img class="mb-3 w-24 h-24 rounded-full shadow-lg" src={item.image} alt="Bonnie image"/>
-              <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{item.artist}</h5>
-              <span class="text-sm text-gray-500 dark:text-gray-400">{item.address}</span>
-              <div class="flex mt-4 space-x-3 lg:mt-6">
-                  <a href="#" class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">explore</a>
-                  
+
+
+<div class="relative bg-white overflow-hidden">
+  <div class="max-w-7xl mx-auto">
+    <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+      <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <polygon points="50,0 100,0 50,100 0,100" />
+      </svg>
+
+      <div>
+        <div class="relative pt-6 px-4 sm:px-6 lg:px-8">
+          <nav class="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">
+            <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
+              <div class="flex items-center justify-between w-full md:w-auto">
+                <a href="#">
+                  <span class="sr-only">Workflow</span>
+                  <img alt="Workflow" class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"/>
+                </a>
+                <div class="-mr-2 flex items-center md:hidden">
+                  <button type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+               
+                    
+                  </button>
+                </div>
               </div>
+            </div>
+           
+          </nav>
+        </div>
+
+      
+        <div class="absolute z-10 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
+          <div class="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
+            <div class="px-5 pt-4 flex items-center justify-between">
+              <div>
+                <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt=""/>
+              </div>
+              <div class="-mr-2">
+                <button type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                  <span class="sr-only">Close main menu</span>
+                  
+                  <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            
+            
           </div>
+        </div>
       </div>
 
-        })
-      }
+      <main class="mt-10 mx-auto max-w-7xl px-2 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+        <div class="sm:text-center lg:text-left">
+          <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+            <span class="block xl:inline">Where words leave off, </span>
+            <span class="block text-indigo-600 xl:inline"> music begins</span>
+          </h1>
+          <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">Music acts like a magic key, to which the most tightly closed heart opens.</p>
+          <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+          <div class="rounded-md shadow">
+              <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"> Explore Music </a>
+            </div>
+            <div class="mt-3 sm:mt-0 sm:ml-3">
+              <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">Explore NFTs </a>
+            </div>
+            
+           
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+    <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://wallpapercave.com/wp/afrTIGi.jpg" alt=""/>
+  </div>
+</div>
+<h1>
+          
+          
+          <div className="py-5 px-2 text-2xl text-sky-400/100">
+          Top Artists
+          </div>
+        </h1>
+        
+        <Artists/>
+
+
+
+        </>
    
-      </div>
-    </>
-  );
+    
+  )
 }
+
+export default index
