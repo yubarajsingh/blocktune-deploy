@@ -84,15 +84,17 @@ function index() {
     <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://wallpapercave.com/wp/afrTIGi.jpg" alt=""/>
   </div>
 </div>
-<h1>
           
           
-          <div className="py-5 px-2 text-2xl text-sky-400/100">
-          Top Artists
-          </div>
-        </h1>
+          
         
-        <Artists/>
+        <></>
+        
+        
+          
+          
+
+        
 
 
 
