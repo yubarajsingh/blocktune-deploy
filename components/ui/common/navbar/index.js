@@ -105,7 +105,7 @@ export default function Navbar() {
               <div className="absolute inset-y-0 right-24 mr-2 items-center hidden lg:flex ">
                 <a
                   className=" px-5 py-2 text-sm font-medium text-gray-200 bg-gray-500 rounded-lg hover:text-slate-900 hover:bg-green-100 hover:rounded-md"
-                  href=""
+                  href="./createmusicnfts"
                 >
                   Create
                 </a>

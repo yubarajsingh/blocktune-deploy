@@ -89,12 +89,12 @@ export default function index() {
             </div>
             <div class="px-2 max-w-sm bg-white rounded-bl-4xl rounded-tr-4xl shadow-md dark:bg-gray-800 dark:border-gray-700">
     <a href="#">
-        <img class="p-8 rounded-bl-3xl rounded-tr-3xl " src={item.image} alt="nft image" />
+        <img class="p-2 rounded-bl-3xl rounded-tr-3xl " src={item.image} alt="nft image" />
     </a>
-    <div class="px-5 pb-2">
+    <div class="px-5">
         <a href="#">
-            <h5 class=" text-center flex-center text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">{item.song}</h5>
-            <h6 class="text-center text-xl font-semibold tracking-tight text-blue-900 text-blue">by {item.artist}</h6>
+            <h5 class=" mb-3 text-center flex-center text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">{item.song}</h5>
+            <h6 class="text-center text-xl font-semibold tracking-tight text-orange-600">by {item.artist}</h6>
             <h6 class="text-center text font- tracking-tight text-gray-900 dark:text-white">floor price: {item.price} eth</h6>
         </a>
        
