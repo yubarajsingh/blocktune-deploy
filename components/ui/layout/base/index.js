@@ -10,7 +10,7 @@ export default function BaseLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <div className="fit bg-zinc-800">{children}</div>
+      <div className="fit bg-zinc-800 ">{children}</div>
       <Footer />
     </Web3Provider>
   );

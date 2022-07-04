@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 export const handler = (web3) => () => {
   const [account, setAccount] = useState(null);
+  const [token, setToken] = useState(null);
+  
 
   useEffect(() => {
     const getAccount = async () => {
@@ -19,5 +21,7 @@ export const handler = (web3) => () => {
         accounts => setAccount(accounts[0] ?? null))
   },[])
 
+
+
   return { account };
-};
+}
