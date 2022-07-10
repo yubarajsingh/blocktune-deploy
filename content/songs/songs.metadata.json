@@ -1,0 +1,22 @@
+[{
+   
+        "id":1,
+        "name":"Be Yourself",
+        "artist": "AudioSlave",
+        "fileSrc": "mp3/beyourself.mp3",
+        "image": "/mp3/beyourself.jpg"
+    },
+    {
+        "id":2,
+        "name":"In Bloom",
+        "artist": "Nirvana",
+        "fileSrc": "/mp3/inbloom.mp3",
+        "image": "/mp3/inbloom.jpeg"
+    },
+    {
+        "id":3,
+        "name":"Yesterday",
+        "artist": "The Beatles",
+        "fileSrc": "/mp3/yesterday.mp3",
+        "image": "/mp3/yesterday.jpg"
+}]

@@ -5,9 +5,9 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',], 
     theme: {
       extend: {
-        maxWidth: {
-          "8xl": "1920px"
-        },
+        fontFamily:{
+          body:['Montserrat','sans-serif']
+        }
       },
     },
     variants: {
@@ -16,5 +16,6 @@ module.exports = {
         cursor: ["disabled"],
       },
     },
-  plugins: [],
+  plugins:[require("daisyui")],
+  
 }

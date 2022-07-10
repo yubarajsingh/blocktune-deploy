@@ -3,7 +3,8 @@ export default function Button({ children, ...rest }) {
     <div className="items-center hidden space-x-4 lg:flex">
       <button
         {...rest}
-        className=" disabled:opacity-50 disabled:cursor-not-allowed px-5 py-2 text-sm text-gray-200 bg-gray-700 rounded-lg animate-pulse font-bold hover:text-slate-900 hover:bg-green-100 hover:rounded-md"
+        className={`border px-4 py-1 uppercase rounded font-medium tracking-wide 
+        hover:bg-[#cacbe1] hover:text-black transition duration-300`}
       >
         {children}
       </button>
