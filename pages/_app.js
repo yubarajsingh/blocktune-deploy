@@ -1,17 +1,24 @@
 import { BaseLayout } from '@components/ui/layout'
 import '@styles/globals.css'
-import { MoralisProvider } from 'react-moralis'
+import { NotificationProvider } from 'web3uikit'
+import { MoralisProvider } from "react-moralis";
 
 function MyApp({ Component, pageProps }) {
   return (
+    
+    
     <MoralisProvider
-    serverUrl='https://ycf0s7ye7gga.usemoralis.com:2053/server'
-    appId='rfz7hidMzRN4UZ0WToKPnAJ8xcNUh0kQrQSHhwJe'
+    appId='aTW6Sa9osvQUnIsN5KPRa0RGjjXjD28sHWf5ntkN'
+    serverUrl='https://maj456w4jhy1.usemoralis.com:2053/server'
     >
-    <BaseLayout>
-      <Component {...pageProps} />
-    </BaseLayout>
-    </MoralisProvider>
+      <NotificationProvider>
+           <BaseLayout>
+            <Component {...pageProps} />
+            </BaseLayout>
+      </NotificationProvider>
+      </MoralisProvider>
+   
+   
   )
 }
 

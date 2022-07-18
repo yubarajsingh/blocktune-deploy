@@ -10,8 +10,8 @@
         "id":2,
         "name":"In Bloom",
         "artist": "Nirvana",
-        "fileSrc": "/mp3/inbloom.mp3",
-        "image": "/mp3/inbloom.jpeg"
+        "fileSrc": "https://res.cloudinary.com/dx5tvmpph/video/upload/v1657647873/y2meta.com_-_ORIGINAL_Music_Video_Stay_With_Me_-_Miki_Matsubara_HITACHI_Sound_Break_320_kbps_pl6dbq.mp3",
+        "image": "https://res.cloudinary.com/dx5tvmpph/image/upload/v1657647711/cld-sample.jpg"
     },
     {
         "id":3,

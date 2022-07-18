@@ -1,8 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useWeb3 } from "@components/providers";
+import {useMoralis} from"react-moralis"
 import { Button } from "@components/ui/common";
 import { useAccount } from "@components/web3/hooks/useAccount";
+import { ConnectWallet, useWallet,ConnectButton } from 'web3uikit';
 import { Modal } from "@components/ui/model";
 import {
   HomeIcon,
@@ -11,8 +13,6 @@ import {
 } from "@heroicons/react/solid";
 
 export default function Navbar() {
-
-
   const { connect, isWeb3Loaded, isLoading } = useWeb3();
   const { account } = useAccount();
   return (
@@ -38,7 +38,7 @@ export default function Navbar() {
           <Link href="/mycollections">
             <a className="header-link group">
               <CollectionIcon className="h-4" />
-              <span className="span">My Collection</span>
+              <span className="span">My Song</span>
             </a>
           </Link>
           <Link href="/topArtists">
@@ -61,7 +61,7 @@ export default function Navbar() {
           )}
 
           <div className="modal" id="my-modal-3">
-            <Modal />
+            <Modal/>
           </div>
         </div>
 
@@ -107,7 +107,7 @@ export default function Navbar() {
                   className=" px-5 py-2 text-sm font-medium text-gray-200 bg-gray-500 rounded-lg hover:text-slate-900 hover:bg-green-100 hover:rounded-md"
                   href="./createmusicnfts"
                 >
-                  Create
+                  Create 
                 </a>
               </div>
 
@@ -127,7 +127,11 @@ export default function Navbar() {
             </>
           ) : (
             <div className="ml-auto">
-              <Button onClick={connect}>Connect</Button>
+              {/* <Button onClick={connect}>Connect</Button> */}
+              <ConnectButton
+  moralisAuth
+  signingMessage="connected successfully"
+/>
             </div>
           )
         ) : (
