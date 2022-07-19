@@ -9,25 +9,33 @@ import Web3 from "web3";
 import {useMoralis} from "react-moralis"
 import { ContractFunctionVisibility } from "hardhat/internal/hardhat-network/stack-traces/model";
 import blockAbi from '../contract/BlockTune.json'
-import { Modal } from "@components/ui/model";
+
+import React from 'react';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function index({ songs }) {
   const { abi }=blockAbi
 
-  const Address="0xd8fB9104c6f31De3eA9C225722568075431Ddc73"
+  const Address="0x51980257b881494Cca20ff73eBef93a9f6D5673F"
   const Api='https://eth-rinkeby.alchemyapi.io/v2/X4CHw1gb78dgqMSwe0avqRuTMLEwNDgF'
   const key="9253088a3c044932e4ad417781ada9c2aa71b65f22223ff0a89c1a63b731e6a4"
   const [currentAccount, setCurrentAccount] = useState('');
   const [loading, setLoading] = useState('');
+  const [pass, setPass] = useState('');
+
   const [projects, setProjects] = useState([]);
   const [cfContract, setCFContract] = useState({});
   const [songlist, setSonglist] = useState([]);
   const [pause, setPause] = useState(false);
+  const [correctNetwork, setCorrectNetwork] = useState(false);
 
 
   const player = useRef();
-
+ 
+  
   const connectWallet = async () => {
     try {
       const { ethereum } = window
@@ -99,6 +107,8 @@ const play = {};
                       const BlockTuneContract = new ethers.Contract(Address, abi,signer);
                       
                       const songCounter = await BlockTuneContract.getSong(0);
+                      
+                      
                       var songnames=songCounter
                       const songLists=[]
                       
@@ -115,7 +125,7 @@ const play = {};
                             songLists.push(songnames)
                             
                           }
-                         
+                           
                            count++
                           songnames=await BlockTuneContract.getSong(count)
                           console.log(count)
@@ -135,7 +145,7 @@ const play = {};
 };
 useEffect(() => {
   setLoading(true)
-  console.log('here',currentAccount.length)
+
   connectWallet()
  fetchSongsList()
  setLoading(false)
@@ -223,20 +233,19 @@ console.log('sonsss',pause)
                 </div>
                 <div className="p-5">
                   <h3 className="text-white text-lg">{song.songName} </h3>
-                  <p className="text-gray-400 overflow-hidden">{song.songArtist} </p>
+                  <h3 className="text-white text-lg">{song.artist} </h3>
+
+                 
                 </div>
                         <div class="flex  justify-end">
-                            <a href="#my-modal-3">
+                            
                             <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center" 
-                            onClick={()=>{
-                
-                              return <Modal data={song.songName}/>
-                            }}>
+                            onClick={()=>sendmoney(song.songArtist,currentAccount)}>
                             <img  class="photo px-4 " src="eth.svg" style={{ height: "20px" }}></img>
-                            <span>Donate</span>
+                            <span>Send Tip</span>
 
                           </button>
-                          </a>
+                          
                           
                         
                       </div>  
@@ -244,6 +253,7 @@ console.log('sonsss',pause)
               </div>
             ))}
           </section>
+          <ToastContainer />
         </div>
      
       </main>
@@ -251,3 +261,55 @@ console.log('sonsss',pause)
   );
 }
 
+
+const sendmoney=async(songaddress,currenAddress)=>{
+
+
+                              let ethereum = window.ethereum;
+
+
+                              // Request account access if needed
+                              await ethereum.enable();
+                          
+                          
+                              let provider = new ethers.providers.Web3Provider(ethereum);
+                          
+                              // Acccounts now exposed
+                              const params = [{
+                                  from: currenAddress,
+                                  to: songaddress,
+                                  value: ethers.utils.parseUnits('0.04', 'ether').toHexString()
+                              }];
+                          
+                              
+                              provider.send('eth_sendTransaction', params).then(response=>
+                                toast.success('send tip successfully!', {
+                                  position: "top-center",
+                                  autoClose: 5000,
+                                  hideProgressBar: false,
+                                  closeOnClick: true,
+                                  pauseOnHover: true,
+                                  draggable: true,
+                                  progress: undefined,
+                                  })
+                                ).catch(err=>
+                                 
+                                  toast.error('error occured!', {
+                                    position: "top-center",
+                                    autoClose: 5000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                    }))
+                             
+                              
+                                
+                              
+                             
+                               
+                                  
+                             
+
+}

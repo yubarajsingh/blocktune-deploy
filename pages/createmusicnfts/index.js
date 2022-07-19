@@ -1,27 +1,29 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState,useRef } from 'react';
 import { ethers } from 'ethers';
-import blockAbi from '../contract/BlockTune.json'
+import blockAbi from '../contract/BlockTune2.json'
 import Web3 from 'web3';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function index() {
   const { abi }=blockAbi
 
-  const Address="0xd8fB9104c6f31De3eA9C225722568075431Ddc73"
+  const Address="0x51980257b881494Cca20ff73eBef93a9f6D5673F"
   const Api='https://eth-rinkeby.alchemyapi.io/v2/X4CHw1gb78dgqMSwe0avqRuTMLEwNDgF'
   const key="9253088a3c044932e4ad417781ada9c2aa71b65f22223ff0a89c1a63b731e6a4"
  
   const [currentAccount, setCurrentAccount] = useState('');
   const [loading, setLoading] = useState('');
-  const [projects, setProjects] = useState([]);
-  const [cfContract, setCFContract] = useState({});
   const nameRef = useRef();
   const imageRef = useRef();
   const artistRef = useRef();
   const linkRef = useRef();
+  const artRef = useRef();
+
   const [correctNetwork, setCorrectNetwork] = useState(false);
+
   
   const connectWallet = async () => {
     try {
@@ -53,17 +55,19 @@ export default function index() {
   }
 
 
-  const addSong= async (e)=>{
-    e.preventDefault();
+  const addSong= async ()=>{
+    
 
     let song = {
       'songName': nameRef.current.value,
       'songArtist': artistRef.current.value,
       'musicHash': linkRef.current.value,
-      'songImage':imageRef.current.value
+      'songImage':imageRef.current.value,
+      'artist':artRef.current.value,
+
 
     };
-    console.log(song)
+   
     try {
       const {ethereum} = window
 
@@ -80,12 +84,36 @@ export default function index() {
         
         const BlockTuneContract = new ethers.Contract(Address, abi , signer);
        
-        BlockTuneContract.storeSong(song.songName,song.songArtist,song.musicHash,song.songImage)
+        BlockTuneContract.storeSong(song.songName,song.songArtist,song.musicHash,song.artist,song.songImage)
         .then(response => {
           console.log("Completed Task");
+          toast.success('stored to the system Successfully!', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+            nameRef.current.value=""
+            imageRef.current.value=""
+            linkRef.current.value=""
+
         })
         .catch(err => {
           console.log("Error occured while adding a new song hai -------------");
+          toast.error('oops! error occured while saving', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+
+            });
+
         });;
 
       } else {
@@ -103,6 +131,7 @@ export default function index() {
    
     connectWallet()
    
+   
 }, []);
   
   return (
@@ -112,7 +141,10 @@ export default function index() {
         <div className=""></div>
 
         <div className="mt-5 md:mt-0 md:col-span-2 ">
-          <form action="#" method="POST">
+          <form id="addsong" action="#" onSubmit={(event) => {
+                                event.preventDefault();
+                                addSong()
+                            }} method="POST">
             <div className="shadow sm:rounded-md sm:overflow-hidden">
               <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                 <div className="grid grid-cols-3 gap-6"></div>
@@ -130,7 +162,24 @@ export default function index() {
                       id="username"
                       type="text"
                       ref={artistRef}
+                      placeholder="Artist Address"
+                      
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                      htmlFor="Name of Artist"
+                    >
+                      Artist Name
+                    </label>
+                    <input
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      id="username"
+                      type="text"
+                      ref={artRef}
                       placeholder="Name of Artist"
+                      required
                     />
                   </div>
 
@@ -146,7 +195,7 @@ export default function index() {
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       id="title"
                       type="text"
-                     
+                      required
                       ref={nameRef}
                       placeholder="Title of Music"
                     />
@@ -166,6 +215,7 @@ export default function index() {
                       type="text"
                       ref={imageRef}
                       placeholder="Music Image Url"
+                      required
                     />
                   </div>
              
@@ -182,6 +232,7 @@ export default function index() {
                       id="musicUrl"
                       type="text"
                       ref={linkRef}
+                      required
                       placeholder="music mp3 url"
                     />
                   </div>
@@ -192,10 +243,11 @@ export default function index() {
               <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                 <button
                   type="submit"
-                  onClick={addSong}
+                  form="addsong"
+                  
                   className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  Create
+                  Upload to Blockchain
                 </button>
               </div>
             </div>
@@ -212,7 +264,9 @@ export default function index() {
           <div className="py-5"></div>
         </div>
       </div>
+
       </div>
+      <ToastContainer />
     </>
   );
 }

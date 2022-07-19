@@ -5,7 +5,7 @@ import { MoralisProvider } from "react-moralis";
 
 function MyApp({ Component, pageProps }) {
   return (
-    
+  
     
     <MoralisProvider
     appId='aTW6Sa9osvQUnIsN5KPRa0RGjjXjD28sHWf5ntkN'
