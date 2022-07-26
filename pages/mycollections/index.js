@@ -8,7 +8,7 @@ import {Footer } from "@components/ui/common";
 import Web3 from "web3";
 import {useMoralis} from "react-moralis"
 import { ContractFunctionVisibility } from "hardhat/internal/hardhat-network/stack-traces/model";
-import blockAbi from '../contract/BlockTune.json'
+import blockAbi from '../contract/BlockTune2.json'
 
 import React from 'react';
 
@@ -18,10 +18,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function index({ songs }) {
   const { abi }=blockAbi
+ 
 
   const Address="0x51980257b881494Cca20ff73eBef93a9f6D5673F"
-  const Api='https://eth-rinkeby.alchemyapi.io/v2/X4CHw1gb78dgqMSwe0avqRuTMLEwNDgF'
-  const key="9253088a3c044932e4ad417781ada9c2aa71b65f22223ff0a89c1a63b731e6a4"
+
   const [currentAccount, setCurrentAccount] = useState('');
   const [loading, setLoading] = useState('');
   const [pass, setPass] = useState('');
@@ -59,7 +59,7 @@ export default function index({ songs }) {
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
       console.log('Found account', accounts[0])
       setCurrentAccount(accounts[0])
-      artistRef.current.value=accounts[0]
+    
     } catch (error) {
       console.log('Error connecting to metamask', error)
     }
@@ -105,32 +105,10 @@ const play = {};
 
                       // Contract
                       const BlockTuneContract = new ethers.Contract(Address, abi,signer);
-                      
-                      const songCounter = await BlockTuneContract.getSong(0);
-                      
-                      
-                      var songnames=songCounter
-                      const songLists=[]
-                      
-
-                      console.log("current account",currentAccount)
-                      var count=0
-                      
-                        while(songnames.songName!='')
-                        { 
-                          
-                          songnames=await BlockTuneContract.getSong(count)
-                          if(accounts[0] != songnames.musicHash)
-                          {
-                            songLists.push(songnames)
-                            
-                          }
-                           
-                           count++
-                          songnames=await BlockTuneContract.getSong(count)
-                          console.log(count)
-                      }
-                      setSonglist(songLists)
+                      console.log("herere ")
+                      const mysong = await BlockTuneContract.getMySong();
+                      console.log("mysongs",mysong)
+                      setSonglist(mysong)
                       console.log(songlist,"song hai bhai jaan")
                       setLoading(false);
                   } catch (e) {

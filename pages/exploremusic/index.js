@@ -8,7 +8,7 @@ import {Footer } from "@components/ui/common";
 import Web3 from "web3";
 import {useMoralis} from "react-moralis"
 import { ContractFunctionVisibility } from "hardhat/internal/hardhat-network/stack-traces/model";
-import blockAbi from '../contract/BlockTune.json'
+import blockAbi from '../contract/BlockTune2.json'
 
 import React from 'react';
 
@@ -107,30 +107,12 @@ const play = {};
                       const BlockTuneContract = new ethers.Contract(Address, abi,signer);
                       
                       const songCounter = await BlockTuneContract.getSong(0);
+                      const allsongs = await BlockTuneContract.getOtherSong();
+                      console.log("all songs",allsongs)
                       
-                      
-                      var songnames=songCounter
-                      const songLists=[]
                       
 
-                      console.log("current account",currentAccount)
-                      var count=0
-                      
-                        while(songnames.songName!='')
-                        { 
-                          
-                          songnames=await BlockTuneContract.getSong(count)
-                          if(accounts[0] != songnames.musicHash)
-                          {
-                            songLists.push(songnames)
-                            
-                          }
-                           
-                           count++
-                          songnames=await BlockTuneContract.getSong(count)
-                          console.log(count)
-                      }
-                      setSonglist(songLists)
+                      setSonglist(allsongs)
                       console.log(songlist,"song hai bhai jaan")
                       setLoading(false);
                   } catch (e) {

@@ -8,8 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function index() {
-  const { abi }=blockAbi
-
+  const abi =blockAbi
   const Address="0x51980257b881494Cca20ff73eBef93a9f6D5673F"
   const Api='https://eth-rinkeby.alchemyapi.io/v2/X4CHw1gb78dgqMSwe0avqRuTMLEwNDgF'
   const key="9253088a3c044932e4ad417781ada9c2aa71b65f22223ff0a89c1a63b731e6a4"
