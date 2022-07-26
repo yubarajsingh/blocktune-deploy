@@ -1,6 +1,138 @@
 /* eslint-disable react/no-unescaped-entities */
+import { useEffect, useState,useRef } from 'react';
+import { ethers } from 'ethers';
+import blockAbi from '../contract/BlockTune2.json'
+import Web3 from 'web3';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function index() {
+  const abi =blockAbi
+  const Address="0x51980257b881494Cca20ff73eBef93a9f6D5673F"
+  const Api='https://eth-rinkeby.alchemyapi.io/v2/X4CHw1gb78dgqMSwe0avqRuTMLEwNDgF'
+  const key="9253088a3c044932e4ad417781ada9c2aa71b65f22223ff0a89c1a63b731e6a4"
+ 
+  const [currentAccount, setCurrentAccount] = useState('');
+  const [loading, setLoading] = useState('');
+  const nameRef = useRef();
+  const imageRef = useRef();
+  const artistRef = useRef();
+  const linkRef = useRef();
+  const artRef = useRef();
+
+  const [correctNetwork, setCorrectNetwork] = useState(false);
+
+  
+  const connectWallet = async () => {
+    try {
+      const { ethereum } = window
+
+      if (!ethereum) {
+        console.log('Metamask not detected')
+        return
+      }
+      let chainId = await ethereum.request({ method: 'eth_chainId'})
+      console.log('Connected to chain:' + chainId)
+
+      const rinkebyChainId = '0x4'
+
+      if (chainId !== rinkebyChainId) {
+        alert('You are not connected to the Rinkeby Testnet!')
+        return
+      } else {
+        setCorrectNetwork(true);
+      }
+
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
+      console.log('Found account', accounts[0])
+      setCurrentAccount(accounts[0])
+      artistRef.current.value=accounts[0]
+    } catch (error) {
+      console.log('Error connecting to metamask', error)
+    }
+  }
+
+
+  const addSong= async ()=>{
+    
+
+    let song = {
+      'songName': nameRef.current.value,
+      'songArtist': artistRef.current.value,
+      'musicHash': linkRef.current.value,
+      'songImage':imageRef.current.value,
+      'artist':artRef.current.value,
+
+
+    };
+   
+    try {
+      const {ethereum} = window
+
+      if(ethereum) {
+        
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        
+        // const provider = new ethers.providers.AlchemyProvider(network="rinkeby", Api);
+
+        const signer = provider.getSigner();
+        // Contract
+        console.log("eta samma")
+       
+        
+        const BlockTuneContract = new ethers.Contract(Address, abi , signer);
+       
+        BlockTuneContract.storeSong(song.songName,song.songArtist,song.musicHash,song.artist,song.songImage)
+        .then(response => {
+          console.log("Completed Task");
+          toast.success('stored to the system Successfully!', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+            nameRef.current.value=""
+            imageRef.current.value=""
+            linkRef.current.value=""
+
+        })
+        .catch(err => {
+          console.log("Error occured while adding a new song hai -------------");
+          toast.error('oops! error occured while saving', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+
+            });
+
+        });;
+
+      } else {
+        console.log("Ethereum object doesn't exist!");
+      }
+    } catch(error) {
+      console.log("Error problem here bhai saap", error);
+    }
+
+   
+  };
+  
+
+  useEffect(() => {
+   
+    connectWallet()
+   
+   
+}, []);
+  
   return (
     <>
     <div className="my-auto bg-gradient-to-t from-slate-900 to-slate-500">
@@ -8,7 +140,10 @@ export default function index() {
         <div className=""></div>
 
         <div className="mt-5 md:mt-0 md:col-span-2 ">
-          <form action="#" method="POST">
+          <form id="addsong" action="#" onSubmit={(event) => {
+                                event.preventDefault();
+                                addSong()
+                            }} method="POST">
             <div className="shadow sm:rounded-md sm:overflow-hidden">
               <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                 <div className="grid grid-cols-3 gap-6"></div>
@@ -25,7 +160,9 @@ export default function index() {
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       id="username"
                       type="text"
-                      placeholder="Name of Artist"
+                      ref={artistRef}
+                      placeholder="Artist Address"
+                      
                     />
                   </div>
                   <div className="mb-4">
@@ -33,65 +170,83 @@ export default function index() {
                       className="block text-gray-700 text-sm font-bold mb-2"
                       htmlFor="Name of Artist"
                     >
-                      Music Name
+                      Artist Name
                     </label>
                     <input
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       id="username"
                       type="text"
+                      ref={artRef}
+                      placeholder="Name of Artist"
+                      required
+                    />
+                  </div>
+
+                  <div className="mb-4">
+                    <label
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                      htmlFor="Name of Artist"
+                      
+                    >
+                      Music Name
+                    </label>
+                    <input
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      id="title"
+                      type="text"
+                      required
+                      ref={nameRef}
                       placeholder="Title of Music"
                     />
                   </div>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    {" "}
-                    Select File{" "}
-                  </label>
-                  <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                    <div className="space-y-1 text-center">
-                      <svg
-                        className="mx-auto h-12 w-12 text-gray-400"
-                        stroke="currentColor"
-                        fill="none"
-                        viewBox="0 0 48 48"
-                        aria-hidden="true"
-                      >
-                        <path
-                          d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                      <div className="flex text-sm text-gray-600">
-                        <label
-                          htmlFor="file-upload"
-                          className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-                        >
-                          <span>Upload music</span>
-                          <input
-                            id="file-upload"
-                            name="file-upload"
-                            type="file"
-                            className="sr-only"
-                          />
-                        </label>
-                        <p className="pl-1">or drag and drop</p>
-                      </div>
-                      <p className="text-xs text-gray-500">
-                        mp4 file up to 10MB
-                      </p>
-                    </div>
+                
+                <div className="mb-4">
+                    <label
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                      htmlFor="music album cover"
+                    >
+                      Music Cover Image
+                    </label>
+                    <input
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      id="musicCover"
+                      type="text"
+                      ref={imageRef}
+                      placeholder="Music Image Url"
+                      required
+                    />
                   </div>
-                </div>
-              </div>
+             
+
+              <div className="mb-4">
+                    <label
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                      htmlFor="Name of Artist"
+                    >
+                      Music Url
+                    </label>
+                    <input
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      id="musicUrl"
+                      type="text"
+                      ref={linkRef}
+                      required
+                      placeholder="music mp3 url"
+                    />
+                  </div>
+                  </div>
+
+               
+                
               <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                 <button
                   type="submit"
+                  form="addsong"
+                  
                   className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  Create
+                  Upload to Blockchain
                 </button>
               </div>
             </div>
@@ -108,7 +263,9 @@ export default function index() {
           <div className="py-5"></div>
         </div>
       </div>
+
       </div>
+      <ToastContainer />
     </>
   );
 }

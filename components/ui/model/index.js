@@ -1,3 +1,2 @@
 
-
-export {default as Modal} from './buytoken';
+export {default as Modal } from './donate';
