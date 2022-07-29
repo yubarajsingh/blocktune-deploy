@@ -8,18 +8,17 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function index() {
-  const abi =blockAbi
+  const {abi} =blockAbi
   const Address="0x51980257b881494Cca20ff73eBef93a9f6D5673F"
-  const Api='https://eth-rinkeby.alchemyapi.io/v2/X4CHw1gb78dgqMSwe0avqRuTMLEwNDgF'
-  const key="9253088a3c044932e4ad417781ada9c2aa71b65f22223ff0a89c1a63b731e6a4"
+
  
   const [currentAccount, setCurrentAccount] = useState('');
   const [loading, setLoading] = useState('');
-  const nameRef = useRef();
-  const imageRef = useRef();
-  const artistRef = useRef();
-  const linkRef = useRef();
-  const artRef = useRef();
+  const NameRef = useRef();
+  const ImageRef = useRef();
+  const ArtistRef = useRef();
+  const LinkRef = useRef();
+  const ArtRef = useRef();
 
   const [correctNetwork, setCorrectNetwork] = useState(false);
 
@@ -47,7 +46,7 @@ export default function index() {
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
       console.log('Found account', accounts[0])
       setCurrentAccount(accounts[0])
-      artistRef.current.value=accounts[0]
+      ArtistRef.current.value=accounts[0]
     } catch (error) {
       console.log('Error connecting to metamask', error)
     }
@@ -58,15 +57,15 @@ export default function index() {
     
 
     let song = {
-      'songName': nameRef.current.value,
-      'songArtist': artistRef.current.value,
-      'musicHash': linkRef.current.value,
-      'songImage':imageRef.current.value,
-      'artist':artRef.current.value,
+      'songName': NameRef.current.value,
+      'songArtist': ArtistRef.current.value,
+      'musicHash': LinkRef.current.value,
+      'songImage':ImageRef.current.value,
+      'artist':ArtRef.current.value,
 
 
     };
-   
+   console.log(song)
     try {
       const {ethereum} = window
 
@@ -82,7 +81,7 @@ export default function index() {
        
         
         const BlockTuneContract = new ethers.Contract(Address, abi , signer);
-       
+        console.log("up complete task");
         BlockTuneContract.storeSong(song.songName,song.songArtist,song.musicHash,song.artist,song.songImage)
         .then(response => {
           console.log("Completed Task");
@@ -95,9 +94,9 @@ export default function index() {
             draggable: true,
             progress: undefined,
             });
-            nameRef.current.value=""
-            imageRef.current.value=""
-            linkRef.current.value=""
+            NameRef.current.value=""
+            ImageRef.current.value=""
+            LinkRef.current.value=""
 
         })
         .catch(err => {
@@ -160,7 +159,7 @@ export default function index() {
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       id="username"
                       type="text"
-                      ref={artistRef}
+                      ref={ArtistRef}
                       placeholder="Artist Address"
                       
                     />
@@ -176,7 +175,7 @@ export default function index() {
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       id="username"
                       type="text"
-                      ref={artRef}
+                      ref={ArtRef}
                       placeholder="Name of Artist"
                       required
                     />
@@ -195,7 +194,7 @@ export default function index() {
                       id="title"
                       type="text"
                       required
-                      ref={nameRef}
+                      ref={NameRef}
                       placeholder="Title of Music"
                     />
                   </div>
@@ -212,7 +211,7 @@ export default function index() {
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       id="musicCover"
                       type="text"
-                      ref={imageRef}
+                      ref={ImageRef}
                       placeholder="Music Image Url"
                       required
                     />
@@ -230,7 +229,7 @@ export default function index() {
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       id="musicUrl"
                       type="text"
-                      ref={linkRef}
+                      ref={LinkRef}
                       required
                       placeholder="music mp3 url"
                     />
