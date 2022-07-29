@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useWeb3 } from "@components/providers";
-import {useMoralis} from"react-moralis"
+
 import { Button } from "@components/ui/common";
 import { useAccount } from "@components/web3/hooks/useAccount";
 import { ConnectWallet, useWallet,ConnectButton } from 'web3uikit';
@@ -22,7 +22,7 @@ export default function Navbar() {
     h-[72px] items-center px-10 md:px-12"
       >
         <Image
-          src="/logo.png"
+          src="/BlockTune.png"
           width={90}
           height={68}
           alt="Logo"
@@ -127,11 +127,8 @@ export default function Navbar() {
             </>
           ) : (
             <div className="ml-auto">
-              {/* <Button onClick={connect}>Connect</Button> */}
-              <ConnectButton
-  moralisAuth
-  signingMessage="connected successfully"
-/>
+              <Button onClick={connect}>Connect</Button>
+              
             </div>
           )
         ) : (

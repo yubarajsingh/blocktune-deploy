@@ -6,7 +6,7 @@ import AudioPlayer from "react-h5-audio-player";
 import { ethers } from 'ethers';
 import {Footer } from "@components/ui/common";
 import Web3 from "web3";
-import {useMoralis} from "react-moralis"
+
 import { ContractFunctionVisibility } from "hardhat/internal/hardhat-network/stack-traces/model";
 import blockAbi from '../contract/BlockTune2.json'
 
